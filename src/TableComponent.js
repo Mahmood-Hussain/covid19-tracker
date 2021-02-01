@@ -1,23 +1,60 @@
 import React from "react";
 import "./TableComponent.css";
+import numeral from "numeral";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  withStyles,
+} from "@material-ui/core";
 
-function Table({ countries }) {
+function TableComponent({ countries }) {
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
   return (
-    <div className="table">
-      <table>
-        <tbody>
+    <TableContainer component={Paper} className="table__container">
+      <Table aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Country</StyledTableCell>
+            <StyledTableCell align="right">Cases</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {countries.map(({ country, cases }, i) => (
-            <tr key={i}>
-              <td>{country}</td>
-              <td>
-                <strong>{cases}</strong>
-              </td>
-            </tr>
+            <StyledTableRow key={i}>
+              <StyledTableCell component="th" scope="row">
+                {country}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {numeral(cases).format("0,0")}
+              </StyledTableCell>
+            </StyledTableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
-export default Table;
+export default TableComponent;
