@@ -1,8 +1,6 @@
 # Covid19 tracking app
 
-{% comment %} 
-  [Live Demo](http://mhbhat.com/covid19-tracker/))
-{% endcomment %}
+[]([Live Demo](http://mhbhat.com/covid19-tracker/))
 
 ## Features
 
